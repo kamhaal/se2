@@ -1,7 +1,4 @@
-
-
-
-
+import logger from "./util/logger";
 
 export interface Order {  
         id: number;
@@ -26,7 +23,8 @@ export class OrderManagement {
     }
 
     getOrder(id: number) {
-        return this.getOrders().find(order => order.id === id);
+        const order = this.getOrders().find(order => order.id === id);
+        return order;
     }
 
     getTotalRevenue() {

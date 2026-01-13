@@ -10,7 +10,8 @@
     "postbuild": "echo Build completed successfully!",
     "prestart": "npm run build",
     "start": "node build/index.js",
-    "dev": "ts-node-dev --respawn src/index.ts"
+    "dev": "ts-node-dev --respawn src/index.ts",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -33,6 +34,7 @@
     "typescript-eslint": "^8.46.1"
   },
   "dependencies": {
-    "dotenv": "^17.2.3"
+    "dotenv": "^17.2.3",
+    "winston": "^3.18.3"
   }
 }
