@@ -1,42 +1,61 @@
-import { FinancialCalculator, OrderManagement, Validator } from "./app";
-import logger from "./util/logger";
+import { Cake } from "model/Cake.model";
+import { CakeBuilder } from "./model/builders/cake.builder";
+import { ToyBuilder } from "./model/builders/toy.builder";
+import { BookBuilder } from "./model/builders/book.builder";
 
-const orders = [
-  { id: 1, item: "Sponge", price: 15 },
-  { id: 2, item: "Chocolate", price: 20 },
-  { id: 3, item: "Fruit", price: 18 },
-  { id: 4, item: "Red Velvet", price: 25 },
-  { id: 5, item: "Coffee", price: 8 },
-];
+async function main() {
+  const cakeBuilder = new CakeBuilder();
+  const cake = cakeBuilder
+    .setType("Birthday")
+    .setFlavor("Chocolate")
+    .setFilling("Cream")
+    .setSize(8)
+    .setLayers(3)
+      .setFrostingType("Ganache")
+      .setFrostingFlavor("Dark Chocolate")
+      .setDecorationType("Sprinkles")
+      .setDecorationColor("Gold")
+      .setCustomMessage("Happy Birthday")
+      .setShape("Round")
+      .setAllergies("Nuts")
+      .setSpecialIngredients("Organic flour")
+      .setPackagingType("Box")
+      .setPrice(45.99)
+      .setQuantity(1)
+    .build();
 
-const orderManager = new OrderManagement(new Validator(), new FinancialCalculator());
-for (const order of orders) {
-    orderManager.addOrder(order.item, order.price);
+  console.log("Cake created:", cake);
+
+
+
+  const toyBuilder = new ToyBuilder();
+  const toy = toyBuilder
+    .setName("Action Figure")
+    .setType("Figure")
+    .setMaterial("Plastic")
+    .setAgeRange("5-12")
+    .setBrand("ToyBrand")
+    .setPrice(19.99)
+    .setQuantity(2)
+    .build();
+
+  console.log("Toy created:", toy);
+
+
+  const bookBuilder = new BookBuilder();
+  const book = bookBuilder
+    .setTitle("The Great Adventure")
+    .setAuthor("John Doe")
+    .setIsbn("123-4567890123")
+    .setGenre("Fiction")
+    .setPages(350)
+    .setPublisher("Fiction House")
+    .setPublicationYear(2023)
+    .setPrice(14.99)
+    .setQuantity(3)
+    .build();
+
+  console.log("Book created:", book);
 }
-let orderId = 6; // Start new orders from ID 6
 
-// Adding a new order directly
-const newItem = "Marble";
-const newPrice = 22;
-
-orderManager.addOrder(newItem, newPrice);
-
-logger.info("Orders after adding a new order:", orderManager.getOrders());
-
-// Calculate Total Revenue directly
-const financialCalculator = new FinancialCalculator();
-logger.info("Total Revenue:", financialCalculator.getRevenue(orders));
-// Calculate Average Buy Power directly
-logger.info("Average Buy Power:", financialCalculator.getAverageBuyPower(orders));
-
-// Fetching an order directly
-const fetchId = 2;
-const fetchedOrder = orderManager.getOrder(fetchId);
-logger.info("Order with ID 2:", fetchedOrder);
-
-// Attempt to fetch a non-existent order
-const nonExistentId = 10;
-const nonExistentOrder = orderManager.getOrder(nonExistentId);
-
-
-logger.info("Order with ID 10 (non-existent):", nonExistentOrder);
+main()
